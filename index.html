@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Player Journey Visualizer</title>
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Gameplay telemetry</p>
+        <h1>Player Journey Visualizer</h1>
+      </div>
+      <div class="status" id="dataStatus">Loading telemetry...</div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="Filters and playback controls">
+        <section class="panel">
+          <h2>Filters</h2>
+          <label for="mapSelect">Map</label>
+          <select id="mapSelect"></select>
+
+          <label for="dateSelect">Date</label>
+          <select id="dateSelect"></select>
+
+          <label for="matchSelect">Match</label>
+          <select id="matchSelect"></select>
+        </section>
+
+        <section class="panel">
+          <h2>Playback</h2>
+          <div class="playback-row">
+            <button id="playButton" type="button">Play</button>
+            <select id="speedSelect" aria-label="Playback speed">
+              <option value="1">1x</option>
+              <option value="4" selected>4x</option>
+              <option value="12">12x</option>
+              <option value="30">30x</option>
+            </select>
+            <output id="timeLabel">0:00</output>
+          </div>
+          <input id="timeRange" type="range" min="0" max="1" step="100" value="1">
+        </section>
+
+        <section class="panel">
+          <h2>Layers</h2>
+          <label class="check-row">
+            <input id="showHumans" type="checkbox" checked>
+            Humans
+          </label>
+          <label class="check-row">
+            <input id="showBots" type="checkbox" checked>
+            Bots
+          </label>
+          <label class="check-row">
+            <input id="showPaths" type="checkbox" checked>
+            Journeys
+          </label>
+          <label class="check-row">
+            <input id="showMarkers" type="checkbox" checked>
+            Events
+          </label>
+
+          <label for="heatSelect">Heatmap</label>
+          <select id="heatSelect">
+            <option value="traffic">Traffic</option>
+            <option value="kills">Kills</option>
+            <option value="deaths">Deaths</option>
+            <option value="storm">Storm deaths</option>
+            <option value="loot">Loot</option>
+            <option value="off">Off</option>
+          </select>
+        </section>
+      </aside>
+
+      <section class="map-workspace" aria-label="Minimap visualization">
+        <div class="workspace-header">
+          <div>
+            <p class="eyebrow" id="activeScope">Map</p>
+            <h2 id="activeTitle">Telemetry view</h2>
+          </div>
+          <div class="legend">
+            <span><i class="legend-line human"></i>Human path</span>
+            <span><i class="legend-line bot"></i>Bot path</span>
+            <span><i class="legend-dot kill"></i>Kill</span>
+            <span><i class="legend-dot death"></i>Death</span>
+            <span><i class="legend-dot loot"></i>Loot</span>
+            <span><i class="legend-dot storm"></i>Storm</span>
+          </div>
+        </div>
+
+        <div class="map-stage" id="mapStage">
+          <img id="mapImage" alt="">
+          <canvas id="heatCanvas" width="1024" height="1024"></canvas>
+          <canvas id="pathCanvas" width="1024" height="1024"></canvas>
+          <canvas id="markerCanvas" width="1024" height="1024"></canvas>
+          <div class="tooltip" id="tooltip" hidden></div>
+        </div>
+      </section>
+
+      <aside class="rightbar" aria-label="Telemetry summary">
+        <section class="panel">
+          <h2>Selection</h2>
+          <div class="metrics-grid" id="metricsGrid"></div>
+        </section>
+
+        <section class="panel match-panel">
+          <h2>Matches</h2>
+          <div class="match-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Match</th>
+                  <th>Date</th>
+                  <th>Players</th>
+                  <th>Events</th>
+                </tr>
+              </thead>
+              <tbody id="matchTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <script src="src/app.js"></script>
+  </body>
+</html>

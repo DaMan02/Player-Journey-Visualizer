@@ -1,0 +1,11 @@
+{
+  "name": "player-journey-visualizer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static player journey visualization tool for gameplay telemetry.",
+  "scripts": {
+    "setup": "python3 -m venv .venv && .venv/bin/python -m pip install -r requirements.txt",
+    "preprocess": ".venv/bin/python scripts/preprocess.py",
+    "serve": "python3 -m http.server 8080"
+  }
+}
