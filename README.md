@@ -4,7 +4,7 @@ A static browser tool for exploring player journeys, combat events, loot pickups
 
 ## Hosted URL
 
-Production URL: add the Vercel, Netlify, or GitHub Pages URL after publishing this repo.
+Production URL: https://gamestatsvisualizer.netlify.app/
 
 Local preview URL: `http://localhost:8080`
 
@@ -41,6 +41,5 @@ This project is static once `public/data/telemetry.json` has been generated. Dep
 
 ## Notes
 
-- The source file is named `instuctions.txt` in this workspace.
 - The raw parquet `ts` values behave like Unix seconds stored in a `timestamp[ms]` column. The preprocessing script converts deltas to milliseconds for browser playback.
 - Folder names are used for calendar date filters because playback time is normalized per match.
