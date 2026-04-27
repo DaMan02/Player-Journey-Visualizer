@@ -25,6 +25,7 @@ const state = {
 };
 
 const els = {
+  loadingOverlay: document.getElementById("loadingOverlay"),
   dataStatus: document.getElementById("dataStatus"),
   mapSelect: document.getElementById("mapSelect"),
   dateSelect: document.getElementById("dateSelect"),
@@ -72,6 +73,15 @@ async function boot() {
     els.dataStatus.textContent = `${summary.rowCount.toLocaleString()} events, ${summary.matchCount.toLocaleString()} matches, ${summary.loadedFiles.toLocaleString()} files`;
   } catch (error) {
     els.dataStatus.textContent = `Telemetry load failed: ${error.message}`;
+  } finally {
+    setInitialLoading(false);
+  }
+}
+
+function setInitialLoading(isLoading) {
+  document.body.classList.toggle("is-loading", isLoading);
+  if (els.loadingOverlay) {
+    els.loadingOverlay.setAttribute("aria-hidden", String(!isLoading));
   }
 }
 

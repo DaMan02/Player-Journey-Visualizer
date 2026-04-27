@@ -27,10 +27,76 @@ body {
   background: var(--bg);
 }
 
+body.is-loading {
+  overflow: hidden;
+}
+
 button,
 select,
 input {
   font: inherit;
+}
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: var(--text);
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 160ms ease, visibility 160ms ease;
+}
+
+body.is-loading .loading-overlay {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.loading-lockup {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+}
+
+.loading-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(243, 244, 241, 0.18);
+  border-top-color: var(--teal);
+  border-radius: 50%;
+  animation: loading-spin 760ms linear infinite;
+}
+
+.loading-lockup p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+@keyframes loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-overlay {
+    transition: none;
+  }
+
+  .loading-spinner {
+    animation: none;
+    border-color: rgba(243, 244, 241, 0.24);
+    border-top-color: var(--teal);
+  }
 }
 
 .topbar {
@@ -402,4 +468,3 @@ tbody tr.active {
     margin: 0;
   }
 }
-

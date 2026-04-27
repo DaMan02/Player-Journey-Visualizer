@@ -6,7 +6,14 @@
     <title>Player Journey Visualizer</title>
     <link rel="stylesheet" href="src/styles.css">
   </head>
-  <body>
+  <body class="is-loading">
+    <div class="loading-overlay" id="loadingOverlay" role="status" aria-live="polite">
+      <div class="loading-lockup">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>Loading telemetry...</p>
+      </div>
+    </div>
+
     <header class="topbar">
       <div>
         <p class="eyebrow">Gameplay telemetry</p>
